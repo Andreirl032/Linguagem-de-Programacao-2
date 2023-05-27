@@ -2,13 +2,15 @@
 public class Retangulo extends Quadrilatero {
     public Retangulo(int numLados, String nome, float[] dimensoes) {
         super(numLados, nome, dimensoes);
-        if (
-                !((dimensoes[0] == dimensoes[1] && dimensoes[2] == dimensoes[3]) ||
-                        (dimensoes[0] == dimensoes[2] && dimensoes[1] == dimensoes[3]) ||
-                        (dimensoes[0] == dimensoes[3] && dimensoes[1] == dimensoes[2]))
-        ) {
-            System.out.println("O QUADRILÁTERO" + nome + "NÃO É UM RETÂNGULO");
-            System.exit(1);
+        if (nome != "null" && numLados != 0 && dimensoes[0] != 0 && dimensoes[1] != 0 && dimensoes[2] != 0) {
+            if (
+                    !((dimensoes[0] == dimensoes[1] && dimensoes[2] == dimensoes[3]) ||
+                            (dimensoes[0] == dimensoes[2] && dimensoes[1] == dimensoes[3]) ||
+                            (dimensoes[0] == dimensoes[3] && dimensoes[1] == dimensoes[2]))
+            ) {
+                System.out.println("O QUADRILÁTERO" + nome + "NÃO É UM RETÂNGULO");
+//                System.exit(1);
+            }
         }
     }
 

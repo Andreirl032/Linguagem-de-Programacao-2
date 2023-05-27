@@ -8,7 +8,9 @@ public class Main {
         figuras.add(new Escaleno(3,"escaleno dahora",Escaleno.arrayDimensoes(5,3,6)));
         figuras.add(new Quadrado(4,"quadrado do balacobaco",Quadrado.arrayDimensoes(7)));
         figuras.add(new Retangulo(4,"retângulo show de bola",Retangulo.arrayDimensoes(4,9)));
+        figuras.add(new Escaleno(3,"escaleno supimpa",Escaleno.arrayDimensoes(5,3,60)));
         compararPerimetro(figuras.get(0),figuras.get(4));
+        compararArea(figuras.get(3), figuras.get(2));
     }
 
     static void compararPerimetro(FiguraGeometrica obj1,FiguraGeometrica obj2){

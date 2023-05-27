@@ -6,8 +6,10 @@ public class Isosceles extends Triangulo{
                 || (dimensoes[0]!=dimensoes[2]&&(dimensoes[1]==dimensoes[0] || dimensoes[1]==dimensoes[2]))
                 || (dimensoes[1]!=dimensoes[2]&&(dimensoes[0]==dimensoes[1] || dimensoes[0]==dimensoes[2]))
         )){
-            System.out.println("O TRIÂNGULO " + nome +" NÃO É ISÓSCELES");
-            System.exit(1);
+            if(nome!="null" && numLados!=0 && dimensoes[0]!=0 && dimensoes[1]!=0&& dimensoes[2]!=0) {
+                System.out.println("O TRIÂNGULO " + nome + " NÃO É ISÓSCELES");
+//                System.exit(1);
+            }
         }
     }
     public static float[] arrayDimensoes(float ladoIgual,float ladoDiferente){

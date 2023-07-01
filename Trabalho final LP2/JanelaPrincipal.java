@@ -17,6 +17,7 @@
 			import javax.swing.JLabel;       	   		// Rotulos
 			import javax.swing.JButton;  				// Botão
 			import javax.swing.JTextField;				// Caixa Texto
+			import javax.swing.JPasswordField;
 
 		// Menu:
 			import javax.swing.JMenuBar;    		    // Barra de Menu´s
@@ -59,7 +60,7 @@ public class JanelaPrincipal extends JFrame implements ActionListener{
 			private JLabel 	 label_login;
 			private JLabel   label_senha;
 			private JTextField txt_login;
-			private JTextField txt_senha;
+			private JPasswordField txt_senha;
 			private JButton  butt_enviar;
 			private JButton  butt_limpar;
 	
@@ -94,7 +95,7 @@ public class JanelaPrincipal extends JFrame implements ActionListener{
 					label_login = new JLabel("Login: ");
 					txt_login   = new JTextField(25);
 					label_senha = new JLabel("Senha: ");
-					txt_senha   = new JTextField(25);
+					txt_senha   = new JPasswordField(25);
 
 					butt_enviar  = new JButton("Enviar"); 
 					butt_enviar.addActionListener(this);

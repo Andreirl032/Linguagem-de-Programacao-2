@@ -12,6 +12,7 @@ public class WriteAndRead{
 		String barra  = System.getProperty("file.separator");
 		String curBrq = System.getProperty("user.dir") + barra + "Arquivos" + barra + "Brinquedos";
 		String curRst = System.getProperty("user.dir") + barra + "Arquivos" + barra + "Restaurantes";
+		String curUsr = System.getProperty("user.dir") + barra + "Arquivos" + barra + "Usuarios";
 		private Brinquedo  brinquedo;	private ArrayList<Brinquedo>  AL_brinquedo;
 		private Attraction restaurante; private ArrayList<Attraction> AL_restaurante;	
 		private Pessoa     pessoa;      private ArrayList<Pessoa>     AL_pessoa;
@@ -77,13 +78,23 @@ public class WriteAndRead{
 									linha = ler_arq.readLine();
 									cont++;
 								}
-
+								file_arq.close(); ler_arq.close();
 								this.AL_brinquedo.add(new Brinquedo(name, ID, desc, capc, min_altura, min_age, open, close));	
 							}catch(Exception e){System.out.printf("Erro ao ler_all_brinquedos!\n"); return null;}
 						}		
 					}
 					return this.AL_brinquedo;
 				}catch(Exception e){System.out.printf("Erro ao ler_all_brinquedos!\n"); return null;}
+			}
+
+			public boolean excBrinquedo(Brinquedo b){
+				String pathTxt = curBrq + barra + b.getName() + ".txt";
+				try{
+					File file = new File(pathTxt);
+					if(file.delete()){return true;}else{return false;}
+				}catch(Exception e){
+					return false;
+				}
 			}
 
 		// Restaurante:	
@@ -101,9 +112,114 @@ public class WriteAndRead{
 				}catch(IOException e){System.out.printf("Erro ao escrever Restaurante em arquivo de txt.\n"); return false;}	
 			}
 
-			// public void lerRestaurante(Attraction a){
-			// 	String curArq = curBrq +barra + "Arquivos" + barra + "Brinquedos";
-				
-			// }
+			public ArrayList lerRestaurantes(){
+				this.AL_restaurante = new ArrayList<Attraction>();
 
+				String dir;
+				String linha;
+				int    cont;
+				String name=""; int ID=0; String desc=""; int capc=0;
+				try{
+					File pasta = new File(curRst);
+					File[] lista = pasta.listFiles();
+					for(File arquivo : lista){ 
+
+						if(arquivo.isFile()){
+							dir = curRst + barra + arquivo.getName(); 
+							FileReader     file_arq = new FileReader(dir);
+							BufferedReader ler_arq  = new BufferedReader(file_arq);
+							linha = ""; cont=0;
+							try{
+
+								linha = ler_arq.readLine(); 
+								while(linha!=null){
+									switch(cont){
+										case 0: name       = linha; break;
+										case 1: ID         = Integer.parseInt(linha); break;
+										case 2: desc       = linha; break;
+										case 3: capc       = Integer.parseInt(linha); break;
+									}	
+									linha = ler_arq.readLine();
+									cont++;
+								}
+								file_arq.close(); ler_arq.close();
+								this.AL_restaurante.add(new Attraction(name, ID, desc, capc));	
+							}catch(Exception e){System.out.printf("bErro ao ler_all_brinquedos!\n"); return null;}
+						}		
+					}
+					return this.AL_restaurante;
+				}catch(Exception e){System.out.printf("aErro ao ler_all_brinquedos!\n"); return null;}
+			}
+
+			public boolean excRestaurante(Attraction a){
+				String pathTxt = curBrq + barra + a.getName() + ".txt";
+				try{
+					File file = new File(pathTxt);
+					if(file.delete()){return true;}else{return false;}
+				}catch(Exception e){
+					return false;
+				}
+			}			
+
+		// Restaurante:	
+			public boolean escPessoa(Pessoa p){
+				String pathTxt = curUsr + barra + p.getName() + ".txt";
+				try{ 
+					FileWriter   file_arq = new FileWriter(pathTxt);
+					PrintWriter print_arq = new PrintWriter(file_arq); 
+					print_arq.println(p.getName());
+					print_arq.println(p.getID());
+					print_arq.println(p.getAge());
+					print_arq.println(p.getAltura());
+					print_arq.close();
+					return true;
+				}catch(IOException e){System.out.printf("Erro ao escrever Usuario em arquivo de txt.\n"); return false;}	
+			}
+
+			public ArrayList lerPessoas(){
+				this.AL_pessoa = new ArrayList<Pessoa>();
+
+				String dir;
+				String linha;
+				int    cont;
+				String name=""; int ID=0; int idade=0; float altura=0f;
+				try{
+					File pasta = new File(curUsr);
+					File[] lista = pasta.listFiles();
+					for(File arquivo : lista){ 
+						if(arquivo.isFile()){
+							dir = curUsr + barra + arquivo.getName(); 
+							FileReader     file_arq = new FileReader(dir);
+							BufferedReader ler_arq  = new BufferedReader(file_arq);
+							linha = ""; cont=0;
+							try{
+								linha = ler_arq.readLine(); 
+								while(linha!=null){
+									switch(cont){
+										case 0: name   = linha; break;
+										case 1: ID     = Integer.parseInt(linha); break;
+										case 2: idade  = Integer.parseInt(linha); break;
+										case 3: altura = Float.parseFloat(linha); break;
+									}	
+									linha = ler_arq.readLine();
+									cont++;
+								}
+								file_arq.close(); ler_arq.close();
+								this.AL_pessoa.add(new Pessoa(name, ID, idade, altura));	
+							}catch(Exception e){System.out.printf("Erro ao ler_all_pessoas!\n"); return null;}
+						}		
+					}
+					return this.AL_pessoa;
+				}catch(Exception e){System.out.printf("Erro ao ler_all_pessoas!\n"); return null;}
+			}	
+
+			public boolean excPessoa(Pessoa p){
+				String pathTxt = curUsr + barra + p.getName() + ".txt";
+				try{
+					File file = new File(pathTxt);
+					if(file.delete()){return true;}else{return false;}
+				}catch(Exception e){
+					return false;
+				}
+			}
 }

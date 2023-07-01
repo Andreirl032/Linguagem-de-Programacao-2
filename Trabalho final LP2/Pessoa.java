@@ -5,9 +5,9 @@ import java.util.Map;
 public class Pessoa{
 	// Atributos
 		private String name;
+		private int    ID;
 		private float  altura;
 		private int    age;
-		private int    ID;
 
 		private Attraction is_doing;
 		private HashMap<Attraction, Integer> have_done;
@@ -17,13 +17,13 @@ public class Pessoa{
 			this.is_doing = null;
 			this.have_done = new HashMap<Attraction, Integer>();
 		}
-		public Pessoa(String name, float altura, int age, int ID){
+		public Pessoa(String name, int ID, int age, float altura){
 			this.is_doing = null;
 			this.have_done = new HashMap<Attraction, Integer>();
 			this.name   = name;
-			this.setAltura(altura);
-			this.setAge(age);
 			this.ID     = ID;
+			this.setAltura(altura);
+			this.setAge(age);	
 		}
 
 	// Gets && Sets
@@ -32,6 +32,9 @@ public class Pessoa{
 			public void   setName(String name){
 				this.name = name;
 			}
+
+			public int  getID(){return this.ID;}
+			public void setID(int ID){this.ID = ID;}
 
 			public float getAltura(){return this.altura;}
 			public void  setAltura(float altura){
@@ -42,9 +45,6 @@ public class Pessoa{
 			public void setAge(int age){
 				if(age>=0){this.age = age;}
 			}
-
-			public int  getID(){return this.ID;}
-			public void setID(int ID){this.ID = ID;}
 
 		// actions:
 			public Attraction getIs_doing(){return this.is_doing;}

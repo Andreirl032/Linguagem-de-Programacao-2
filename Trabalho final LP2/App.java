@@ -12,13 +12,10 @@ public class App {
 		File dirRst = new File(curRst); if(!dirRst.exists()){dirRst.mkdirs();}
 		File dirUsr = new File(curUsr); if(!dirUsr.exists()){dirUsr.mkdirs();}
 
-
-
-
-
-		JanelaPrincipal janela_principal = new JanelaPrincipal();
-//		JanelaAdministrador JanelaADM = new JanelaAdministrador();
+		//JanelaPrincipal janela_principal = new JanelaPrincipal();
+		JanelaAdministrador JanelaADM = new JanelaAdministrador();
 		//JanelaAdcBrinquedo JanelaCadBrinquedo = new JanelaAdcBrinquedo();
 		//JanelaAdcRestaurante JanelaCadRestaurante = new JanelaAdcRestaurante();
+		//JanelaAdcPessoa JanelaCadPessoa = new JanelaAdcPessoa();
 	}
 }

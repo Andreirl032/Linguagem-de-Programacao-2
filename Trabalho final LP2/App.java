@@ -13,9 +13,10 @@ public class App {
 		File dirUsr = new File(curUsr); if(!dirUsr.exists()){dirUsr.mkdirs();}
 
 		//JanelaPrincipal janela_principal = new JanelaPrincipal();
-		JanelaAdministrador JanelaADM = new JanelaAdministrador();
+//		JanelaAdministrador JanelaADM = new JanelaAdministrador();
 		//JanelaAdcBrinquedo JanelaCadBrinquedo = new JanelaAdcBrinquedo();
 		//JanelaAdcRestaurante JanelaCadRestaurante = new JanelaAdcRestaurante();
-		//JanelaAdcPessoa JanelaCadPessoa = new JanelaAdcPessoa();
+//		JanelaAdcPessoa JanelaCadPessoa = new JanelaAdcPessoa();
+		JanelaUsuario janela_usuario = new JanelaUsuario();
 	}
 }

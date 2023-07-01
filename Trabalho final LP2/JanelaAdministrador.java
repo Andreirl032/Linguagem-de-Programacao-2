@@ -29,11 +29,8 @@
 			import javax.swing.JMenuItem;  		    	// Itens do respectivo Menu;
 
 	// Extras:
-		import java.util.Vector;	
-		import java.util.ArrayList;
-		import java.util.HashMap;
-		import java.util.Map;
-		import java.awt.Color; 	
+		import java.util.*;
+		import java.awt.Color;
 
 public class JanelaAdministrador extends JFrame implements ActionListener, ListSelectionListener{
 	// Atributos:
@@ -313,7 +310,7 @@ public class JanelaAdministrador extends JFrame implements ActionListener, ListS
 				if (!e.getValueIsAdjusting()) {                                 // Sem double event;
 					String novo = (String)lst_usuar.getSelectedValue();
 					for(int i=0; i<=AL_usuarios.size()-1; i++){
-						if(AL_usuarios.get(i).getName()==novo){
+						if(Objects.equals(AL_usuarios.get(i).getName(), novo)){
 							JanelaShowPessoa showPessoa = new JanelaShowPessoa(AL_usuarios.get(i));
 							this.dispose();
 						}
@@ -323,7 +320,7 @@ public class JanelaAdministrador extends JFrame implements ActionListener, ListS
 				if (!e.getValueIsAdjusting()) {                                 // Sem double event;
 					String novo = (String)lst_brinqd.getSelectedValue();
 					for(int i=0; i<=AL_brinquedos.size()-1; i++){
-						if(AL_brinquedos.get(i).getName()==novo){
+						if(Objects.equals(AL_brinquedos.get(i).getName(), novo)){
 							JanelaShowBrinquedo showBrinquedo = new JanelaShowBrinquedo(AL_brinquedos.get(i));
 							this.dispose();
 						}
@@ -333,7 +330,7 @@ public class JanelaAdministrador extends JFrame implements ActionListener, ListS
 				if (!e.getValueIsAdjusting()) {                                 // Sem double event;
 					String novo = (String)lst_restaur.getSelectedValue();
 					for(int i=0; i<=AL_restaurantes.size()-1; i++){
-						if(AL_restaurantes.get(i).getName()==novo){
+						if(Objects.equals(AL_restaurantes.get(i).getName(), novo)){
 							JanelaShowRestaurante showRestaurante = new JanelaShowRestaurante(AL_restaurantes.get(i));
 							this.dispose();
 						}

@@ -63,7 +63,7 @@ public class Brinquedo extends Attraction{
 							if( Park.getTime() >=this.open && Park.getTime()<=this.close){
 								// Restrições especificas a brinquedos
 								if(super.getID()==100){
-									
+
 								}else if(super.getID()==110){
 
 								}
@@ -73,5 +73,5 @@ public class Brinquedo extends Attraction{
 				}
 			}
 			return false;
-		}	
+		}
 }

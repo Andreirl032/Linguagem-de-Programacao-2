@@ -73,13 +73,13 @@ public class WriteAndRead{
 										case 4: min_altura = Float.parseFloat(linha); break;
 										case 5: min_age    = Integer.parseInt(linha); break;
 										case 6: open       = Integer.parseInt(linha); break;
-										case 7: close      = Integer.parseInt(linha); break;	
+										case 7: close      = Integer.parseInt(linha); break;
 									}
 									linha = ler_arq.readLine();
 									cont++;
 								}
 								file_arq.close(); ler_arq.close();
-								this.AL_brinquedo.add(new Brinquedo(name, ID, desc, capc, min_altura, min_age, open, close));	
+								this.AL_brinquedo.add(new Brinquedo(name, ID, desc, capc, min_altura, min_age, open, close));
 							}catch(Exception e){System.out.printf("Erro ao ler_all_brinquedos!\n"); return null;}
 						}		
 					}

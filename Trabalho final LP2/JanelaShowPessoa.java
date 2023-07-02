@@ -38,7 +38,7 @@ public class JanelaShowPessoa extends JFrame implements ActionListener{
 	// Atributos:
 		// Define:
 			private int LARGURA = 410;
-			private int ALTURA  = 220;	
+			private int ALTURA  = 400;	
 
 		// Return:	
 			Pessoa pessoa = null;
@@ -59,7 +59,9 @@ public class JanelaShowPessoa extends JFrame implements ActionListener{
 			
 			private JLabel     lbl_altura;
 			private JTextField txt_altura;	
-			
+
+			private JLabel    lbl_ingresso;
+			private JList<String> jl_lista;
 
 			private JButton excluir;
 			private JButton sair;
@@ -99,6 +101,29 @@ public class JanelaShowPessoa extends JFrame implements ActionListener{
 				this.txt_altura = new JTextField(25);
 				this.txt_altura.setText(Float.toString(pessoa.getAltura()));
 				this.txt_altura.setEditable(false);
+
+
+				this.lbl_ingresso = new JLabel("Ingressos: ");
+		        // Jlist:
+			        int tam = pessoa.getHave_done().size() <= 0 ? 1 : pessoa.getHave_done().size();
+					String ingressos[] = new String[tam];
+					for(int i=0; i<=pessoa.getHave_done().size()-1; i++){
+			            ingressos[i]=pessoa.getHave_done().get(i).getName();
+			        }
+			        if(ingressos[0]==null){ingressos[0]="Sem Ingressos!\n";}
+			        
+					this.jl_lista = new JList<String>(ingressos);
+					this.jl_lista.setSelectionForeground(Color.RED);
+					this.jl_lista.setSelectionBackground(new Color(255, 100, 100, 80));
+					this.jl_lista.setFixedCellWidth(190);
+					this.jl_lista.setFixedCellHeight(30);
+
+				// Scroll:
+					JScrollPane jl_lista_scroll = new JScrollPane();
+			        jl_lista.setLayoutOrientation(JList.VERTICAL);
+			        jl_lista_scroll.setViewportView(jl_lista);
+			        jl_lista_scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);	
+
 				
 				this.excluir = new JButton("EXCLUIR");
 				this.excluir.addActionListener(this);
@@ -130,10 +155,15 @@ public class JanelaShowPessoa extends JFrame implements ActionListener{
 				spring_layout.putConstraint(SpringLayout.NORTH, txt_altura,  10, SpringLayout.SOUTH,  txt_idade);
 				spring_layout.putConstraint(SpringLayout.WEST,  txt_altura,  39, SpringLayout.EAST,  lbl_altura);
 
-				spring_layout.putConstraint(SpringLayout.NORTH,    excluir,  10, SpringLayout.SOUTH, txt_altura);
-				spring_layout.putConstraint(SpringLayout.EAST,     excluir,   0, SpringLayout.EAST,  txt_altura);
-				spring_layout.putConstraint(SpringLayout.NORTH,       sair,  10, SpringLayout.SOUTH, txt_altura);
-				spring_layout.putConstraint(SpringLayout.EAST,        sair, -40, SpringLayout.WEST,     excluir);
+				spring_layout.putConstraint(SpringLayout.NORTH, lbl_ingresso,  14, SpringLayout.SOUTH, lbl_altura);
+				spring_layout.putConstraint(SpringLayout.WEST,  lbl_ingresso,  10, SpringLayout.WEST,      painel);
+				spring_layout.putConstraint(SpringLayout.NORTH, jl_lista_scroll,  14, SpringLayout.SOUTH, lbl_altura);
+				spring_layout.putConstraint(SpringLayout.WEST,  jl_lista_scroll,  90, SpringLayout.EAST,  lbl_ingresso);
+
+				spring_layout.putConstraint(SpringLayout.SOUTH,    excluir,  -55, SpringLayout.SOUTH,   painel);
+				spring_layout.putConstraint(SpringLayout.EAST,     excluir,  -40, SpringLayout.EAST,    painel);
+				spring_layout.putConstraint(SpringLayout.SOUTH,       sair,  -55, SpringLayout.SOUTH,   painel);
+				spring_layout.putConstraint(SpringLayout.EAST,        sair,  -40, SpringLayout.WEST,   excluir);
 
 			// Adicionar:
 				painel.add(lbl_nome);	
@@ -144,6 +174,8 @@ public class JanelaShowPessoa extends JFrame implements ActionListener{
 				painel.add(txt_idade);
 				painel.add(lbl_altura);	
 				painel.add(txt_altura);
+				painel.add(lbl_ingresso);
+				painel.add(jl_lista_scroll);
 
 				painel.add(excluir);
 				painel.add(sair);	

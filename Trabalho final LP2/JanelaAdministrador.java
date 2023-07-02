@@ -29,8 +29,11 @@
 			import javax.swing.JMenuItem;  		    	// Itens do respectivo Menu;
 
 	// Extras:
-		import java.util.*;
-		import java.awt.Color;
+		import java.util.Vector;	
+		import java.util.ArrayList;
+		import java.util.HashMap;
+		import java.util.Map;
+		import java.awt.Color; 	
 
 public class JanelaAdministrador extends JFrame implements ActionListener, ListSelectionListener{
 	// Atributos:
@@ -55,6 +58,7 @@ public class JanelaAdministrador extends JFrame implements ActionListener, ListS
 			private JButton nov_brinq;
 			private JButton nov_restr;
 			private JButton nov_usuar;
+			private JButton sair;
 
 		// Painel 2:	
 			private int LARGURA_p2 = (int)(LARGURA/3);
@@ -112,28 +116,34 @@ public class JanelaAdministrador extends JFrame implements ActionListener, ListS
 					this.nov_restr.addActionListener(this);
 					this.nov_usuar = new JButton("Novo Usuario");
 					this.nov_usuar.addActionListener(this);
+					this.sair      = new JButton("Sair");
+					this.sair.addActionListener(this);
 
 				// Posicionamento:
 					painel_1.setBackground(new Color(80,80,80,80));
 					painel_1.setBounds(0, 0, LARGURA_p1, ALTURA_p1);
 					painel_1.setLayout(spring_layout_1);
-					spring_layout_1.putConstraint(SpringLayout.NORTH, bem_vindo,  10, SpringLayout.NORTH, painel_1);
-					spring_layout_1.putConstraint(SpringLayout.WEST,  bem_vindo,  10, SpringLayout.WEST,  painel_1);
+					spring_layout_1.putConstraint(SpringLayout.NORTH, bem_vindo,  10, SpringLayout.NORTH,  painel_1);
+					spring_layout_1.putConstraint(SpringLayout.WEST,  bem_vindo,  10, SpringLayout.WEST,   painel_1);
 
-					spring_layout_1.putConstraint(SpringLayout.NORTH, nov_brinq,  10, SpringLayout.NORTH, painel_1);
-					spring_layout_1.putConstraint(SpringLayout.EAST,  nov_brinq, -25, SpringLayout.EAST,  painel_1);
+					spring_layout_1.putConstraint(SpringLayout.NORTH, nov_brinq,  10, SpringLayout.NORTH,  painel_1);
+					spring_layout_1.putConstraint(SpringLayout.EAST,  nov_brinq, -25, SpringLayout.EAST,   painel_1);
 
-					spring_layout_1.putConstraint(SpringLayout.NORTH, nov_restr,  10, SpringLayout.NORTH, painel_1);
+					spring_layout_1.putConstraint(SpringLayout.NORTH, nov_restr,  10, SpringLayout.NORTH,  painel_1);
 					spring_layout_1.putConstraint(SpringLayout.EAST,  nov_restr, -15, SpringLayout.WEST,  nov_brinq);
 
-					spring_layout_1.putConstraint(SpringLayout.NORTH, nov_usuar,  10, SpringLayout.NORTH, painel_1);
+					spring_layout_1.putConstraint(SpringLayout.NORTH, nov_usuar,  10, SpringLayout.NORTH,  painel_1);
 					spring_layout_1.putConstraint(SpringLayout.EAST,  nov_usuar, -15, SpringLayout.WEST,  nov_restr);
+
+					spring_layout_1.putConstraint(SpringLayout.NORTH,      sair,  10, SpringLayout.NORTH,  painel_1);
+					spring_layout_1.putConstraint(SpringLayout.EAST,       sair, -15, SpringLayout.WEST,  nov_usuar);
 
 				// Adicionar:
 					painel_1.add(bem_vindo);	
 					painel_1.add(nov_brinq);
 					painel_1.add(nov_restr);		
-					painel_1.add(nov_usuar);	
+					painel_1.add(nov_usuar);
+					painel_1.add(sair);	
 
 			// Inicializar Painel 02:
 				// Atributos:
@@ -301,7 +311,11 @@ public class JanelaAdministrador extends JFrame implements ActionListener, ListS
 			}else if(event.getSource() == nov_restr){
 				JanelaAdcRestaurante JanelaCadRestaurante = new JanelaAdcRestaurante();
 				this.dispose();
+			}else if(event.getSource() == sair){
+				JanelaPrincipal janela_principal = new JanelaPrincipal();
+				this.dispose();
 			}
+
 		}
 
 		@Override
@@ -310,7 +324,7 @@ public class JanelaAdministrador extends JFrame implements ActionListener, ListS
 				if (!e.getValueIsAdjusting()) {                                 // Sem double event;
 					String novo = (String)lst_usuar.getSelectedValue();
 					for(int i=0; i<=AL_usuarios.size()-1; i++){
-						if(Objects.equals(AL_usuarios.get(i).getName(), novo)){
+						if(AL_usuarios.get(i).getName()==novo){
 							JanelaShowPessoa showPessoa = new JanelaShowPessoa(AL_usuarios.get(i));
 							this.dispose();
 						}
@@ -320,7 +334,7 @@ public class JanelaAdministrador extends JFrame implements ActionListener, ListS
 				if (!e.getValueIsAdjusting()) {                                 // Sem double event;
 					String novo = (String)lst_brinqd.getSelectedValue();
 					for(int i=0; i<=AL_brinquedos.size()-1; i++){
-						if(Objects.equals(AL_brinquedos.get(i).getName(), novo)){
+						if(AL_brinquedos.get(i).getName()==novo){
 							JanelaShowBrinquedo showBrinquedo = new JanelaShowBrinquedo(AL_brinquedos.get(i));
 							this.dispose();
 						}
@@ -330,7 +344,7 @@ public class JanelaAdministrador extends JFrame implements ActionListener, ListS
 				if (!e.getValueIsAdjusting()) {                                 // Sem double event;
 					String novo = (String)lst_restaur.getSelectedValue();
 					for(int i=0; i<=AL_restaurantes.size()-1; i++){
-						if(Objects.equals(AL_restaurantes.get(i).getName(), novo)){
+						if(AL_restaurantes.get(i).getName()==novo){
 							JanelaShowRestaurante showRestaurante = new JanelaShowRestaurante(AL_restaurantes.get(i));
 							this.dispose();
 						}

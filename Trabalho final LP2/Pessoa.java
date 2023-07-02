@@ -17,13 +17,13 @@ public class Pessoa{
 			this.is_doing = null;
 			this.have_done = new ArrayList<Attraction>();
 		}
-		public Pessoa(String name, int ID, int age, float altura,ArrayList<Attraction> have_done){
+		public Pessoa(String name, int ID, int age, float altura){
 			this.is_doing = null;
-			this.have_done = have_done;
+			this.have_done = new ArrayList<Attraction>();
 			this.name   = name;
 			this.ID     = ID;
 			this.setAltura(altura);
-			this.setAge(age);
+			this.setAge(age);	
 		}
 
 	// Gets && Sets
@@ -48,32 +48,15 @@ public class Pessoa{
 
 		// actions:
 			public Attraction getIs_doing(){return this.is_doing;}
-			public void       setIs_doing(Attraction attc){
-				this.is_doing = attc;
-			}
+			public void       setIs_doing(Attraction attc){this.is_doing = attc;}
 
 			public ArrayList<Attraction> getHave_done(){return this.have_done;}
-			public void    setHave_done(ArrayList<Attraction> hasm){
-				this.have_done = hasm;
-			}
+			public void setHave_done(ArrayList arry){this.have_done = arry;}
 
-
-
-	// Metodos
-		public void showInfo(){
-			System.out.printf("%-10s - %3d Years - %.2fm;\n", this.name, this.age, this.altura);
-			System.out.printf("ID: %d;\n", this.ID);
-			this.showDoing();
-		}	
-
-		public void showDoing(){
-			System.out.printf("No momento: %s;\n", (this.is_doing!=null) ? this.is_doing.getName() : "Nada");
-			System.out.printf("Já foi em:\n");
-
-			int i=1;
-			for(Attraction elem : this.have_done){
-				System.out.printf("\tid:%d nome:%s;\n", i, elem.getID(),elem.getName());
-				i++;
-			}
+	// Metodos	
+		public boolean compraIngresso(Attraction a){
+			
+			this.have_done.add(a);
+			return true;
 		}
 }

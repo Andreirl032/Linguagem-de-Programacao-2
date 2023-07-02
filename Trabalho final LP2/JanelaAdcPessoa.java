@@ -27,7 +27,6 @@
 			import javax.swing.JMenuItem;  		    	// Itens do respectivo Menu;
 
 	// Extras:
-		import java.util.ArrayList;
 		import java.util.HashMap;
 		import java.util.Map;
 		import java.awt.Color; 	
@@ -157,7 +156,7 @@ public class JanelaAdcPessoa extends JFrame implements ActionListener{
 						float  n_altura = Float.parseFloat(s_altura);
 
 					// Criar:	
-						this.pessoa = new Pessoa(nome, n_ID, n_idade, n_altura,new ArrayList<Attraction>());
+						this.pessoa = new Pessoa(nome, n_ID, n_idade, n_altura); 
 						if(salvar.escPessoa(pessoa)){System.out.printf("Pessoa %s Cadastrado!\n", pessoa.getName());}
 						String mensagem = "Pessoa  " + pessoa.getName() + "  Cadastrado!"; 
 						JOptionPane.showMessageDialog(null, mensagem);

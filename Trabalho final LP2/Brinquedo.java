@@ -39,39 +39,39 @@ public class Brinquedo extends Attraction{
 		}
 
 	//Metodos
-		@Override
-		public void showInfo(){
-			System.out.printf("Imprimindo Information:\n");
-			System.out.printf("\t%15s: %s;\n", super.getName(), super.getDesc());
-			System.out.printf("\tID:            %d;\n",            this.getID());
-			System.out.printf("\tCapacidade:    %d;\n",            super.getCapc());
-			System.out.printf("\tMinima Altura: %.1f;\n",          this.min_altura);
-			System.out.printf("\tMinima Idade:  %d;\n",            this.min_age);
-			System.out.printf("\tFuncionamento: %2d:00-%2d:00;\n", this.open, this.close);
-			System.out.println();
-			super.showCUClients();
-			super.showEXClients();
-		}
+		// @Override
+		// public void showInfo(){
+		// 	System.out.printf("Imprimindo Information:\n");
+		// 	System.out.printf("\t%15s: %s;\n", super.getName(), super.getDesc());
+		// 	System.out.printf("\tID:            %d;\n",            this.getID());
+		// 	System.out.printf("\tCapacidade:    %d;\n",            super.getCapc());
+		// 	System.out.printf("\tMinima Altura: %.1f;\n",          this.min_altura);
+		// 	System.out.printf("\tMinima Idade:  %d;\n",            this.min_age);
+		// 	System.out.printf("\tFuncionamento: %2d:00-%2d:00;\n", this.open, this.close);
+		// 	System.out.println();
+		// 	super.showCUClients();
+		// 	super.showEXClients();
+		// }
 
-		@Override
-		public boolean addClient(Pessoa p){
-			ArrayList cur = super.getCUclients();
-			if(!cur.contains(p)){
-				if(super.getCUclients().size() < super.getCapc()){
-					if(p.getAltura() >= this.min_altura){
-						if(p.getAge() >= this.min_age){
-							if( Park.getTime() >=this.open && Park.getTime()<=this.close){
-								// Restrições especificas a brinquedos
-								if(super.getID()==100){
+		// @Override
+		// public boolean addClient(Pessoa p){
+		// 	ArrayList cur = super.getCUclients();
+		// 	if(!cur.contains(p)){
+		// 		if(super.getCUclients().size() < super.getCapc()){
+		// 			if(p.getAltura() >= this.min_altura){
+		// 				if(p.getAge() >= this.min_age){
+		// 					if( Park.getTime() >=this.open && Park.getTime()<=this.close){
+		// 						// Restrições especificas a brinquedos
+		// 						if(super.getID()==100){
+									
+		// 						}else if(super.getID()==110){
 
-								}else if(super.getID()==110){
-
-								}
-							}
-						}
-					}
-				}
-			}
-			return false;
-		}
+		// 						}
+		// 					}
+		// 				}
+		// 			}
+		// 		}
+		// 	}
+		// 	return false;
+		// }	
 }

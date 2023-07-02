@@ -25,9 +25,11 @@
 			import javax.swing.JMenuItem;  		    	// Itens do respectivo Menu;
 
 	// Extras:
+		import java.util.Vector;	
+		import java.util.ArrayList;
 		import java.util.HashMap;
 		import java.util.Map;
-		import java.awt.Color; 	
+		import java.awt.Color;  	
 		
 
 public class JanelaPrincipal extends JFrame implements ActionListener{
@@ -45,28 +47,30 @@ public class JanelaPrincipal extends JFrame implements ActionListener{
 		// Dados Login:
 			private String login;
 			private String senha;
-			private HashMap<String, String> HM_clientes;
+			private ArrayList<Pessoa> AL_usuarios;
 
 		// Menu
 			private JMenuBar  barra_menu = new JMenuBar();
-			private JMenu     menu1      = new JMenu("Alunos");
+			private JMenu     menu1      = new JMenu("Creditos");
 			private JMenu     menu2      = new JMenu("Sair");	
 			private JMenuItem item1_1    = new JMenuItem("Victor");
+			private JMenuItem item1_2    = new JMenuItem("Andrei");
+			private JMenuItem item2_1    = new JMenuItem("SAIR");
 
 		// Painel_login
 			private JPanel painel_login       = new JPanel();
 			private SpringLayout layout_login = new SpringLayout(); 
 
-			private JLabel 	 label_login;
-			private JLabel   label_senha;
-			private JTextField txt_login;
+			private JLabel 	     label_login;
+			private JLabel       label_senha;
+			private JTextField     txt_login;
 			private JPasswordField txt_senha;
-			private JButton  butt_enviar;
-			private JButton  butt_limpar;
+			private JButton      butt_enviar;
+			private JButton      butt_limpar;
 	
 	// Construtor:
 		public JanelaPrincipal(){
-			super("Programa do Victor");
+			super("Programa");
 			this.setLayout(null);
 			this.setSize(LARGURA, ALTURA);
 			this.setLocationRelativeTo(null);                           // Centralizar;
@@ -84,7 +88,9 @@ public class JanelaPrincipal extends JFrame implements ActionListener{
 				this.barra_menu.add(menu1);
 				this.barra_menu.add(menu2);
 				this.menu1.add(item1_1);
-				item1_1.addActionListener(new ActionListener(){
+				this.menu1.add(item1_2);
+				this.menu2.add(item2_1);
+				item2_1.addActionListener(new ActionListener(){
 					public void actionPerformed(ActionEvent e){
 						System.exit(0);
 					}
@@ -125,9 +131,8 @@ public class JanelaPrincipal extends JFrame implements ActionListener{
 					layout_login.putConstraint(SpringLayout.EAST,  butt_limpar, -10, SpringLayout.WEST, butt_enviar);
 
 			// Inicializar Armazenamento:
-				HM_clientes = new HashMap<String, String>(); // senha = hashmap[login]
-				HM_clientes.put("victor", "1811");
-
+				WriteAndRead salvar = new WriteAndRead();	
+				AL_usuarios = salvar.lerPessoas();
 
 			// Adicionar:
 				painel_login.add(label_login);
@@ -140,7 +145,7 @@ public class JanelaPrincipal extends JFrame implements ActionListener{
 		}
 
 		@Override
-		public void actionPerformed(ActionEvent event) {
+		public void actionPerformed(ActionEvent event){
 			if(event.getSource() == butt_enviar) {
 				login = this.txt_login.getText();
 				senha = this.txt_senha.getText(); 
@@ -148,19 +153,17 @@ public class JanelaPrincipal extends JFrame implements ActionListener{
 					JanelaAdministrador JanelaADM = new JanelaAdministrador();
 					this.dispose();
 				}else{
-					boolean flag = false;
-					for(Map.Entry<String, String> elem : HM_clientes.entrySet()){
-						if(login.equals(elem.getKey()) && senha.equals(elem.getValue())){
-							flag=true;
-							break;
+					boolean flag=true;
+					for(int i=0; i<=AL_usuarios.size()-1; i++){
+						if(login.equals(AL_usuarios.get(i).getName())){
+							if(senha.equals(Integer.toString(AL_usuarios.get(i).getID()))){
+								flag=false;
+								JanelaUsuario janela_do_usuario = new JanelaUsuario(AL_usuarios.get(i));
+								this.dispose();
+							}
 						}
 					}
-
-					if(flag){
-						JOptionPane.showMessageDialog(null, "Usuario Aceito!");
-					}else{
-						JOptionPane.showMessageDialog(null, "Sem Correspondente!");
-					}
+					if(flag){JOptionPane.showMessageDialog(null, "Sem Correspondente!");}
 				}
 				this.txt_login.setText("");
 				this.txt_senha.setText("");

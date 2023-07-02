@@ -1,3 +1,5 @@
+import org.w3c.dom.Attr;
+
 import java.io.File;           // classe File
 import java.io.FileWriter;     //
 import java.io.FileReader; 
@@ -5,7 +7,8 @@ import java.io.BufferedReader;
 import java.io.PrintWriter;
 import java.io.IOException;    // classe IOException
 
-import java.util.ArrayList;    
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class WriteAndRead{
 	// Atributos;
@@ -164,6 +167,16 @@ public class WriteAndRead{
 		// Restaurante:	
 			public boolean escPessoa(Pessoa p){
 				String pathTxt = curUsr + barra + p.getName() + ".txt";
+				String str = "";
+				ArrayList<Attraction> have_done_list = p.getHave_done();
+				for(int i=0;i<have_done_list.size();i++){
+					str+=have_done_list.get(i).getID();
+					if(i!=have_done_list.size()-1){
+					str+=",";
+					}
+				}
+
+
 				try{ 
 					FileWriter   file_arq = new FileWriter(pathTxt);
 					PrintWriter print_arq = new PrintWriter(file_arq); 
@@ -171,18 +184,44 @@ public class WriteAndRead{
 					print_arq.println(p.getID());
 					print_arq.println(p.getAge());
 					print_arq.println(p.getAltura());
+					print_arq.println(str);
 					print_arq.close();
 					return true;
 				}catch(IOException e){System.out.printf("Erro ao escrever Usuario em arquivo de txt.\n"); return false;}	
 			}
 
-			public ArrayList lerPessoas(){
+			public ArrayList<Attraction> turnStringIntoHaveDone(String s){
+				String[] str = s.split(",");
+				int[] ids = new int[str.length];
+				for(int i=0;i<str.length;i++){
+					ids[i]=Integer.parseInt(str[i]);
+				}
+
+				ArrayList<Attraction> attracs = new ArrayList<Attraction>();
+				ArrayList<Attraction> AL_brinquedos = this.lerBrinquedos();
+				ArrayList<Attraction> AL_restaurantes = this.lerRestaurantes();
+				for(int i:ids){
+					for(Attraction brinqs:AL_brinquedos){
+						if(brinqs.getID()==i){
+							attracs.add(brinqs);
+						}
+					}
+					for(Attraction rests:AL_restaurantes){
+						if(rests.getID()==i){
+							attracs.add(rests);
+						}
+					}
+				}
+				return attracs;
+			}
+
+			public ArrayList<Pessoa> lerPessoas(){
 				this.AL_pessoa = new ArrayList<Pessoa>();
 
 				String dir;
 				String linha;
 				int    cont;
-				String name=""; int ID=0; int idade=0; float altura=0f;
+				String name=""; int ID=0; int idade=0; float altura=0f; ArrayList<Attraction> have_done = new ArrayList<Attraction>();
 				try{
 					File pasta = new File(curUsr);
 					File[] lista = pasta.listFiles();
@@ -200,12 +239,13 @@ public class WriteAndRead{
 										case 1: ID     = Integer.parseInt(linha); break;
 										case 2: idade  = Integer.parseInt(linha); break;
 										case 3: altura = Float.parseFloat(linha); break;
+										case 4: have_done = turnStringIntoHaveDone(linha); break;
 									}	
 									linha = ler_arq.readLine();
 									cont++;
 								}
 								file_arq.close(); ler_arq.close();
-								this.AL_pessoa.add(new Pessoa(name, ID, idade, altura));	
+								this.AL_pessoa.add(new Pessoa(name, ID, idade, altura, have_done));
 							}catch(Exception e){System.out.printf("Erro ao ler_all_pessoas!\n"); return null;}
 						}		
 					}

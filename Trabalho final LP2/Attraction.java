@@ -96,22 +96,22 @@ public class Attraction{
 				return false;
 			}
 
-			public boolean extClient(Pessoa p){
-				if(CUclients.contains(p)){
-					p.setIs_doing(null); 
-					p.getHave_done().put(this, p.getHave_done().containsKey(this) ? p.getHave_done().get(this) + 1 : 1);
-					CUclients.remove(p);										// Retiro dos clientes em uso; 			
-					EXclients.put(p, EXclients.containsKey(p) ? EXclients.get(p) + 1 : 1);  // Adiciono nos ex-clientes;
-				}
-				return false;
-			}
-
-			public boolean extAllClient(){
-				while(CUclients.size()>0){
-					this.extClient(CUclients.get(0));
-				}
-				return false;
-			}
+//			public boolean extClient(Pessoa p){
+//				if(CUclients.contains(p)){
+//					p.setIs_doing(null);
+//					p.getHave_done().put(this, p.getHave_done().containsKey(this) ? p.getHave_done().get(this) + 1 : 1);
+//					CUclients.remove(p);										// Retiro dos clientes em uso;
+//					EXclients.put(p, EXclients.containsKey(p) ? EXclients.get(p) + 1 : 1);  // Adiciono nos ex-clientes;
+//				}
+//				return false;
+//			}
+//
+//			public boolean extAllClient(){
+//				while(CUclients.size()>0){
+//					this.extClient(CUclients.get(0));
+//				}
+//				return false;
+//			}
 
 
 }

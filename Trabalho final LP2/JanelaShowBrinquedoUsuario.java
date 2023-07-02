@@ -181,8 +181,6 @@ public class JanelaShowBrinquedoUsuario extends JFrame implements ActionListener
         spring_layout.putConstraint(SpringLayout.NORTH, txt_close,  10, SpringLayout.SOUTH,  txt_open);
         spring_layout.putConstraint(SpringLayout.WEST,  txt_close,  11, SpringLayout.EAST,  lbl_close);
 
-//        spring_layout.putConstraint(SpringLayout.NORTH, excluir,  10, SpringLayout.SOUTH,   txt_close);
-//        spring_layout.putConstraint(SpringLayout.EAST,  excluir,   0, SpringLayout.EAST,    txt_close);
         spring_layout.putConstraint(SpringLayout.NORTH,      sair,  10, SpringLayout.SOUTH, txt_close);
         spring_layout.putConstraint(SpringLayout.EAST,       sair, 0, SpringLayout.EAST,    txt_close);
 

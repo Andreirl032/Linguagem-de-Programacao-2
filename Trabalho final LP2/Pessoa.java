@@ -10,20 +10,20 @@ public class Pessoa{
 		private int    age;
 
 		private Attraction is_doing;
-		private HashMap<Attraction, Integer> have_done;
+		private ArrayList<Attraction> have_done;
 
 	// Construtores
 		public Pessoa(){
 			this.is_doing = null;
-			this.have_done = new HashMap<Attraction, Integer>();
+			this.have_done = new ArrayList<Attraction>();
 		}
-		public Pessoa(String name, int ID, int age, float altura){
+		public Pessoa(String name, int ID, int age, float altura,ArrayList<Attraction> have_done){
 			this.is_doing = null;
-			this.have_done = new HashMap<Attraction, Integer>();
+			this.have_done = have_done;
 			this.name   = name;
 			this.ID     = ID;
 			this.setAltura(altura);
-			this.setAge(age);	
+			this.setAge(age);
 		}
 
 	// Gets && Sets
@@ -52,8 +52,8 @@ public class Pessoa{
 				this.is_doing = attc;
 			}
 
-			public HashMap<Attraction, Integer> getHave_done(){return this.have_done;}
-			public void    setHave_done(HashMap<Attraction, Integer> hasm){
+			public ArrayList<Attraction> getHave_done(){return this.have_done;}
+			public void    setHave_done(ArrayList<Attraction> hasm){
 				this.have_done = hasm;
 			}
 
@@ -71,8 +71,8 @@ public class Pessoa{
 			System.out.printf("Já foi em:\n");
 
 			int i=1;
-			for(Map.Entry<Attraction, Integer> elem : have_done.entrySet()){
-				System.out.printf("\t%d. %s - %d;\n", i, elem.getKey().getName(), elem.getValue());
+			for(Attraction elem : this.have_done){
+				System.out.printf("\tid:%d nome:%s;\n", i, elem.getID(),elem.getName());
 				i++;
 			}
 		}

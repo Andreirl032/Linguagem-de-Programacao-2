@@ -1,6 +1,7 @@
 import java.io.File;
+import java.util.ArrayList;
 
-public class App { 
+public class App {
 	public static void main(String args[]) {
 		String curDir = System.getProperty("user.dir");
 		String curArq = curDir + System.getProperty("file.separator") + "Arquivos";
@@ -17,6 +18,9 @@ public class App {
 		//JanelaAdcBrinquedo JanelaCadBrinquedo = new JanelaAdcBrinquedo();
 		//JanelaAdcRestaurante JanelaCadRestaurante = new JanelaAdcRestaurante();
 //		JanelaAdcPessoa JanelaCadPessoa = new JanelaAdcPessoa();
-		JanelaUsuario janela_usuario = new JanelaUsuario();
+		WriteAndRead salvar = new WriteAndRead();
+		ArrayList<Attraction> bruh =salvar.lerPessoas().get(0).getHave_done();
+		Pessoa pessoa = new Pessoa("Andrei",69,18,1.8f,bruh);
+		JanelaUsuario janela_usuario = new JanelaUsuario(pessoa);
 	}
 }

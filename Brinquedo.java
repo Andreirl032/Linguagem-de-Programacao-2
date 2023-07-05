@@ -14,6 +14,13 @@ public class Brinquedo extends Attraction{
 			this.min_altura = min_altura;
 			this.min_age    = min_age;
 			this.open       = open;
+			this.close      = close;	
+		}
+		public Brinquedo(String name, int ID, String desc, int capacidade, float min_altura, int min_age, int open, int close, int curr){
+			super(name, ID, desc, capacidade, curr);
+			this.min_altura = min_altura;
+			this.min_age    = min_age;
+			this.open       = open;
 			this.close      = close;
 		}
 

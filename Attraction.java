@@ -8,21 +8,23 @@ public class Attraction{
 		private int         ID;			
 		private String    desc;
 		private int       capc;
-		private ArrayList<Pessoa>         CUclients;
-		private HashMap<Pessoa, Integer>  EXclients;
+		private int       curr;
 
 	// Construtores
-		public Attraction(){
-			this.CUclients = new ArrayList<Pessoa>();
-			this.EXclients = new HashMap<Pessoa, Integer>();	
-		}
+		public Attraction(){}
 		public Attraction(String name, int ID, String desc, int capc){
 			this.name = name;
 			this.ID   =   ID;
 			this.desc = desc;
 			this.capc = capc;
-			this.CUclients = new ArrayList<Pessoa>();
-			this.EXclients = new HashMap<Pessoa, Integer>();
+			this.curr = 0;
+		}
+		public Attraction(String name, int ID, String desc, int capc, int curr){
+			this.name = name;
+			this.ID   =   ID;
+			this.desc = desc;
+			this.capc = capc;
+			this.curr = curr;
 		}
 
 	// Gets && Sets
@@ -44,15 +46,9 @@ public class Attraction{
 		public int  getCapc(){return this.capc;}
 		public void setCapc(int capc){this.capc = capc;}
 
-		public ArrayList getCUclients(){return this.CUclients;}
-		public void    	 setCUclients(ArrayList array){
-			this.CUclients = array;
-		}
-
-		public HashMap getEXclients(){return this.EXclients;}
-		public void    setEXclients(HashMap hsmap){
-			this.EXclients = hsmap;
-		}
+		public int  getCurr(){return this.curr;}
+		public void setCurr(int curr){this.curr = curr;}
+		
 
 	// Metodos	
 		//Show:
@@ -84,29 +80,23 @@ public class Attraction{
 
 		//Action:	
 			// public boolean addClient(Pessoa p){
-			// 	if(this.CUclients.size() < this.capc){          // Se cabe mais 1;
-			// 		if(p.getIs_doing()==null){					// Se esse 1 não tá fazendo nada;					
-			// 			p.setIs_doing(this); 
+			// 	if(this.CUclients.size() < this.capc){          // Se cabe mais 1;				
 			// 			CUclients.add(p);
 			// 			return true;
-			// 		}
 			// 	}
 			// 	return false;
 			// }
 
-			// public boolean extClient(Pessoa p){
+			// public boolean remClient(Pessoa p){			
 			// 	if(CUclients.contains(p)){
-			// 		p.setIs_doing(null); 
-			// 		p.getHave_done().put(this, p.getHave_done().containsKey(this) ? p.getHave_done().get(this) + 1 : 1);
-			// 		CUclients.remove(p);										// Retiro dos clientes em uso; 			
-			// 		EXclients.put(p, EXclients.containsKey(p) ? EXclients.get(p) + 1 : 1);  // Adiciono nos ex-clientes;
+			// 		CUclients.remove(p);
 			// 	}
 			// 	return false;
 			// }
 
 			// public boolean extAllClient(){
 			// 	while(CUclients.size()>0){
-			// 		this.extClient(CUclients.get(0));
+			// 		this.remClient(CUclients.get(0));
 			// 	}
 			// 	return false;
 			// }

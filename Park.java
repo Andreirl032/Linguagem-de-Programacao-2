@@ -48,22 +48,22 @@ public class Park{
  			}
 		}
 
-		public void showAttractions(){
-			for(int i=0; i<=Attractions.size()-1; i++){
-				if(Attractions.get(i) instanceof  Brinquedo){
-					Brinquedo b = (Brinquedo)Attractions.get(i);
-					b.showInfo();
-				}else{
-					Attractions.get(i).showInfo();
-				}
-			}
-		}
-
-		public void showInfo(){
-			System.out.printf("-------------------------------------------\n");
-			System.out.printf("%-15s:\n", this.name);
-			this.showAttractions();
-			System.out.printf("-------------------------------------------\n");
-		}
+//		public void showAttractions(){
+//			for(int i=0; i<=Attractions.size()-1; i++){
+//				if(Attractions.get(i) instanceof  Brinquedo){
+//					Brinquedo b = (Brinquedo)Attractions.get(i);
+//					b.showInfo();
+//				}else{
+//					Attractions.get(i).showInfo();
+//				}
+//			}
+//		}
+//
+//		public void showInfo(){
+//			System.out.printf("-------------------------------------------\n");
+//			System.out.printf("%-15s:\n", this.name);
+//			this.showAttractions();
+//			System.out.printf("-------------------------------------------\n");
+//		}
 	
 }

@@ -34,6 +34,7 @@ public class WriteAndRead{
 					print_arq.println(b.getName());
 					print_arq.println(b.getID());
 					print_arq.println(b.getDesc());
+					print_arq.println(b.getCurr());
 					print_arq.println(b.getCapc());
 					print_arq.println(b.getMin_altura());
 					print_arq.println(b.getMin_age());
@@ -50,7 +51,7 @@ public class WriteAndRead{
 				String dir;
 				String linha;
 				int    cont;
-				String name=""; int ID=0; String desc=""; int capc=0; float min_altura=0f; int min_age=0; int open=0; int close=0;
+				String name=""; int ID=0; String desc=""; int curr=0; int capc=0; float min_altura=0f; int min_age=0; int open=0; int close=0;
 				try{
 					File pasta = new File(curBrq);
 					File[] lista = pasta.listFiles();
@@ -69,17 +70,18 @@ public class WriteAndRead{
 										case 0: name       = linha; break;
 										case 1: ID         = Integer.parseInt(linha); break;
 										case 2: desc       = linha; break;
-										case 3: capc       = Integer.parseInt(linha); break;
-										case 4: min_altura = Float.parseFloat(linha); break;
-										case 5: min_age    = Integer.parseInt(linha); break;
-										case 6: open       = Integer.parseInt(linha); break;
-										case 7: close      = Integer.parseInt(linha); break;	
+										case 3: curr       = Integer.parseInt(linha); break;
+										case 4: capc       = Integer.parseInt(linha); break;
+										case 5: min_altura = Float.parseFloat(linha); break;
+										case 6: min_age    = Integer.parseInt(linha); break;
+										case 7: open       = Integer.parseInt(linha); break;
+										case 8: close      = Integer.parseInt(linha); break;	
 									}
 									linha = ler_arq.readLine();
 									cont++;
 								}
 								file_arq.close(); ler_arq.close();
-								this.AL_brinquedo.add(new Brinquedo(name, ID, desc, capc, min_altura, min_age, open, close));	
+								this.AL_brinquedo.add(new Brinquedo(name, ID, desc, capc, min_altura, min_age, open, close, curr));	
 							}catch(Exception e){System.out.printf("Erro ao ler_all_brinquedos!\n"); return null;}
 						}		
 					}
@@ -106,6 +108,7 @@ public class WriteAndRead{
 					print_arq.println(a.getName());
 					print_arq.println(a.getID());
 					print_arq.println(a.getDesc());
+					print_arq.println(a.getCurr());
 					print_arq.println(a.getCapc());
 					print_arq.close(); file_arq.close();
 					return true;
@@ -118,7 +121,7 @@ public class WriteAndRead{
 				String dir;
 				String linha;
 				int    cont;
-				String name=""; int ID=0; String desc=""; int capc=0;
+				String name=""; int ID=0; String desc=""; int capc=0; int curr=0;
 				try{
 					File pasta = new File(curRst);
 					File[] lista = pasta.listFiles();
@@ -137,13 +140,14 @@ public class WriteAndRead{
 										case 0: name       = linha; break;
 										case 1: ID         = Integer.parseInt(linha); break;
 										case 2: desc       = linha; break;
-										case 3: capc       = Integer.parseInt(linha); break;
+										case 3: curr       = Integer.parseInt(linha); break;
+										case 4: capc       = Integer.parseInt(linha); break;
 									}	
 									linha = ler_arq.readLine();
 									cont++;
 								}
 								file_arq.close(); ler_arq.close();
-								this.AL_restaurante.add(new Attraction(name, ID, desc, capc));	
+								this.AL_restaurante.add(new Attraction(name, ID, desc, capc, curr));	
 							}catch(Exception e){System.out.printf("bErro ao ler_all_brinquedos!\n"); return null;}
 						}		
 					}
@@ -171,6 +175,7 @@ public class WriteAndRead{
 					print_arq.println(p.getID());
 					print_arq.println(p.getAge());
 					print_arq.println(p.getAltura());
+					print_arq.println(p.getIs_doing()!=null ? p.getIs_doing().getName() : "Empty!");
 
 					for(int i=0; i<=p.getHave_done().size()-1; i++){
 						print_arq.print(p.getHave_done().get(i).getID());
@@ -191,7 +196,8 @@ public class WriteAndRead{
 				String linha;
 				int    cont;
 				String txt_separado[] = new String[100];
-				String name=""; int ID=0; int idade=0; float altura=0f;
+				String name=""; int ID=0; int idade=0; float altura=0f; 
+				Attraction is_doing = null; String str_is_doing="";
 				ArrayList<Attraction> arry_retorno = new ArrayList<Attraction>();
 
 				try{
@@ -213,12 +219,28 @@ public class WriteAndRead{
 										case 2: idade  = Integer.parseInt(linha); break;
 										case 3: altura = Float.parseFloat(linha); break;
 										case 4:
+											str_is_doing = linha;
+											if(str_is_doing.equals("Empty!")){
+												is_doing = null;
+											}else{ 
+												for(int i=0; i<=all_brinquedos.size()-1; i++){
+													if(str_is_doing.equals(all_brinquedos.get(i).getName())){
+														is_doing = all_brinquedos.get(i);
+													}
+												}
+												for(int i=0; i<=all_restaurantes.size()-1; i++){
+													if(str_is_doing.equals(all_restaurantes.get(i).getName())){
+														is_doing = all_restaurantes.get(i);
+													}
+												}
+											}
+											break;
+										case 5:
 											txt_separado = linha.split("_");
 											if(txt_separado.length>=1){ 
 												for(int i=0; i<=txt_separado.length-1; i++){
 													for(int j=0; j<=all_brinquedos.size()-1; j++){
 														if(txt_separado[i].equals(Integer.toString(all_brinquedos.get(j).getID()))){
-															//if(!arry_retorno.contains(all_brinquedos.get(j))){arry_retorno.add(all_brinquedos.get(j));}
 															arry_retorno.add(all_brinquedos.get(j));
 															break;
 														}	
@@ -238,7 +260,7 @@ public class WriteAndRead{
 								}
 								file_arq.close(); ler_arq.close();
 
-								Pessoa p = new Pessoa(name, ID, idade, altura); p.setHave_done(arry_retorno);
+								Pessoa p = new Pessoa(name, ID, idade, altura, is_doing); p.setHave_done(arry_retorno);
 								this.AL_pessoa.add(p);	
 							}catch(Exception e){System.out.printf("1_Erro ao ler_all_pessoas!\n"); return null;}
 						}		

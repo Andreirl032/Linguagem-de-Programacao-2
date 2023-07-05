@@ -24,6 +24,9 @@
 			import javax.swing.JMenu;      			    // Menu
 			import javax.swing.JMenuItem;  		    	// Itens do respectivo Menu;
 
+		// Imagens:
+			import javax.imageio.ImageIO;	
+
 	// Extras:
 		import java.util.Vector;	
 		import java.util.ArrayList;

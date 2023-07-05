@@ -60,7 +60,7 @@ public class JanelaAdministrador extends JFrame implements ActionListener, ListS
 			private JButton nov_usuar;
 			private JButton sair;
 
-		// Painel 2:	
+		// Painel 2:
 			private int LARGURA_p2 = (int)(LARGURA/3);
 			private int ALTURA_p2  = ALTURA - ALTURA_p1;
 
@@ -71,7 +71,7 @@ public class JanelaAdministrador extends JFrame implements ActionListener, ListS
 			private String[] names_usuarios = new String[this.max_size];
 			private JList lst_usuar;
 
-		// Painel 3:	
+		// Painel 3:
 			private int LARGURA_p3 = (int)(LARGURA/3);
 			private int ALTURA_p3  = ALTURA - ALTURA_p1;
 
@@ -82,7 +82,7 @@ public class JanelaAdministrador extends JFrame implements ActionListener, ListS
 			private String[] names_brinquedos = new String[this.max_size];
 			private JList    lst_brinqd;
 
-		// Painel 4:	
+		// Painel 4:
 			private int LARGURA_p4 = (int)(LARGURA/3);
 			private int ALTURA_p4  = ALTURA - ALTURA_p1;
 
@@ -170,7 +170,7 @@ public class JanelaAdministrador extends JFrame implements ActionListener, ListS
 							this.lst_usuar = new JList(nomes_usuarios);
 							this.lst_usuar.setSelectionForeground(Color.RED);
 							this.lst_usuar.setSelectionBackground(new Color(255, 100, 100, 80));
-							this.lst_usuar.setFixedCellWidth(190);
+							this.lst_usuar.setFixedCellWidth((int)((LARGURA/3)-3*30));
 							this.lst_usuar.setFixedCellHeight(30);
 							this.lst_usuar.addListSelectionListener(this);
 
@@ -178,7 +178,7 @@ public class JanelaAdministrador extends JFrame implements ActionListener, ListS
 							JScrollPane lst_usuar_scroll = new JScrollPane();
 							lst_usuar_scroll.setViewportView(lst_usuar);
 							lst_usuar.setLayoutOrientation(JList.VERTICAL);
-							lst_usuar_scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+							lst_usuar_scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
 				// Posicionamento:
 					painel_2.setBackground(new Color(255,0,0,80));
@@ -219,7 +219,7 @@ public class JanelaAdministrador extends JFrame implements ActionListener, ListS
 							this.lst_brinqd = new JList(nomes_brinqd);
 							this.lst_brinqd.setSelectionForeground(Color.RED);
 							this.lst_brinqd.setSelectionBackground(new Color(255, 100, 100, 80));
-							this.lst_brinqd.setFixedCellWidth(190);
+							this.lst_brinqd.setFixedCellWidth((int)((LARGURA/3)-3*30));
 							this.lst_brinqd.setFixedCellHeight(30);
 							this.lst_brinqd.addListSelectionListener(this);
 
@@ -227,7 +227,7 @@ public class JanelaAdministrador extends JFrame implements ActionListener, ListS
 							JScrollPane lst_brinqd_scroll = new JScrollPane();
 							lst_brinqd_scroll.setViewportView(lst_brinqd);
 							lst_brinqd.setLayoutOrientation(JList.VERTICAL);
-							lst_brinqd_scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+							lst_brinqd_scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
 				// Posicionamento:
 					painel_3.setBackground(new Color(0,255,0,80));
@@ -268,7 +268,7 @@ public class JanelaAdministrador extends JFrame implements ActionListener, ListS
 							this.lst_restaur = new JList(nomes_restaurante);
 							this.lst_restaur.setSelectionForeground(Color.RED);
 							this.lst_restaur.setSelectionBackground(new Color(255, 100, 100, 80));
-							this.lst_restaur.setFixedCellWidth(190);
+							this.lst_restaur.setFixedCellWidth((int)((LARGURA/3)-3*33));
 							this.lst_restaur.setFixedCellHeight(30);
 							this.lst_restaur.addListSelectionListener(this);		
 
@@ -276,7 +276,7 @@ public class JanelaAdministrador extends JFrame implements ActionListener, ListS
 							JScrollPane lst_restaur_scroll = new JScrollPane();
 							lst_restaur_scroll.setViewportView(lst_restaur);
 							lst_restaur.setLayoutOrientation(JList.VERTICAL);
-							lst_restaur_scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);	
+							lst_restaur_scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);	
 							
 
 				// Posicionamento:
@@ -315,7 +315,6 @@ public class JanelaAdministrador extends JFrame implements ActionListener, ListS
 				JanelaPrincipal janela_principal = new JanelaPrincipal();
 				this.dispose();
 			}
-
 		}
 
 		@Override

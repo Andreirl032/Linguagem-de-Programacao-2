@@ -103,7 +103,7 @@ public class JanelaShowBrinquedoUsuario extends JFrame implements ActionListener
 
                 this.lbl_capc = new JLabel("Capacidade:    ");
                 this.txt_capc = new JTextField(25);
-                this.txt_capc.setText(Integer.toString(brinquedo.getCapc()));
+                this.txt_capc.setText(Integer.toString(brinquedo.getCurr()) + "/" + Integer.toString(brinquedo.getCapc()));
                 this.txt_capc.setEditable(false);
 
                 this.lbl_min_age    = new JLabel("Idade Minima: ");

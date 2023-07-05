@@ -38,7 +38,7 @@ public class JanelaShowPessoa extends JFrame implements ActionListener{
 	// Atributos:
 		// Define:
 			private int LARGURA = 410;
-			private int ALTURA  = 400;	
+			private int ALTURA  = 450;	
 
 		// Return:	
 			Pessoa pessoa = null;
@@ -59,6 +59,9 @@ public class JanelaShowPessoa extends JFrame implements ActionListener{
 			
 			private JLabel     lbl_altura;
 			private JTextField txt_altura;	
+
+			private JLabel     lbl_is_doing;
+			private JTextField txt_is_doing;	
 
 			private JLabel    lbl_ingresso;
 			private JList<String> jl_lista;
@@ -102,6 +105,17 @@ public class JanelaShowPessoa extends JFrame implements ActionListener{
 				this.txt_altura.setText(Float.toString(pessoa.getAltura()));
 				this.txt_altura.setEditable(false);
 
+				this.lbl_is_doing = new JLabel("Atualmente:     ");
+				this.txt_is_doing = new JTextField(25);
+				String str_is_doing;
+				if(pessoa.getIs_doing()!=null){
+					str_is_doing = pessoa.getIs_doing().getName();
+				}else{
+					str_is_doing = "Empty!";
+				}
+				this.txt_is_doing.setText(str_is_doing);
+				this.txt_is_doing.setEditable(false);
+
 
 				this.lbl_ingresso = new JLabel("Ingressos: ");
 		        // Jlist:
@@ -115,8 +129,8 @@ public class JanelaShowPessoa extends JFrame implements ActionListener{
 					this.jl_lista = new JList<String>(ingressos);
 					this.jl_lista.setSelectionForeground(Color.RED);
 					this.jl_lista.setSelectionBackground(new Color(255, 100, 100, 80));
-					this.jl_lista.setFixedCellWidth(190);
-					this.jl_lista.setFixedCellHeight(30);
+					this.jl_lista.setFixedCellWidth(260);
+					this.jl_lista.setFixedCellHeight(21);
 
 				// Scroll:
 					JScrollPane jl_lista_scroll = new JScrollPane();
@@ -155,10 +169,15 @@ public class JanelaShowPessoa extends JFrame implements ActionListener{
 				spring_layout.putConstraint(SpringLayout.NORTH, txt_altura,  10, SpringLayout.SOUTH,  txt_idade);
 				spring_layout.putConstraint(SpringLayout.WEST,  txt_altura,  39, SpringLayout.EAST,  lbl_altura);
 
-				spring_layout.putConstraint(SpringLayout.NORTH, lbl_ingresso,  14, SpringLayout.SOUTH, lbl_altura);
-				spring_layout.putConstraint(SpringLayout.WEST,  lbl_ingresso,  10, SpringLayout.WEST,      painel);
-				spring_layout.putConstraint(SpringLayout.NORTH, jl_lista_scroll,  14, SpringLayout.SOUTH, lbl_altura);
-				spring_layout.putConstraint(SpringLayout.WEST,  jl_lista_scroll,  90, SpringLayout.EAST,  lbl_ingresso);
+				spring_layout.putConstraint(SpringLayout.NORTH, lbl_is_doing,  10, SpringLayout.SOUTH,   lbl_altura);
+				spring_layout.putConstraint(SpringLayout.WEST,  lbl_is_doing,  10, SpringLayout.WEST,        painel);
+				spring_layout.putConstraint(SpringLayout.NORTH, txt_is_doing,  10, SpringLayout.SOUTH,   txt_altura);
+				spring_layout.putConstraint(SpringLayout.WEST,  txt_is_doing,  10, SpringLayout.EAST,  lbl_is_doing);
+
+				spring_layout.putConstraint(SpringLayout.NORTH, lbl_ingresso,  14, SpringLayout.SOUTH,    lbl_is_doing);
+				spring_layout.putConstraint(SpringLayout.WEST,  lbl_ingresso,  10, SpringLayout.WEST,           painel);
+				spring_layout.putConstraint(SpringLayout.NORTH, jl_lista_scroll,  14, SpringLayout.SOUTH, lbl_is_doing);
+				spring_layout.putConstraint(SpringLayout.WEST,  jl_lista_scroll,  28, SpringLayout.EAST,  lbl_ingresso);
 
 				spring_layout.putConstraint(SpringLayout.SOUTH,    excluir,  -55, SpringLayout.SOUTH,   painel);
 				spring_layout.putConstraint(SpringLayout.EAST,     excluir,  -40, SpringLayout.EAST,    painel);
@@ -174,6 +193,8 @@ public class JanelaShowPessoa extends JFrame implements ActionListener{
 				painel.add(txt_idade);
 				painel.add(lbl_altura);	
 				painel.add(txt_altura);
+				painel.add(lbl_is_doing);	
+				painel.add(txt_is_doing);
 				painel.add(lbl_ingresso);
 				painel.add(jl_lista_scroll);
 

@@ -95,7 +95,7 @@ public class JanelaShowRestauranteUsuario extends JFrame implements ActionListen
 
                 this.lbl_capc = new JLabel("Capacidade:    ");
                 this.txt_capc = new JTextField(25);
-                this.txt_capc.setText(Integer.toString(restaurante.getCapc()));
+                this.txt_capc.setText(Integer.toString(restaurante.getCurr()) + "/" + Integer.toString(restaurante.getCapc()));
                 this.txt_capc.setEditable(false);
 
                 this.sair = new JButton("VOLTAR");

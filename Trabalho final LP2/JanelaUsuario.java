@@ -42,6 +42,7 @@
 public class JanelaUsuario extends JFrame implements ActionListener{
 	// Atributos:
 		private Pessoa pessoa = null;
+		private String situation = "";
 		// Define:
 			private int LARGURA = 800;
 			private int ALTURA  = 600;
@@ -68,9 +69,11 @@ public class JanelaUsuario extends JFrame implements ActionListener{
 				private JLabel      lb_ID;
 				private JLabel      lb_idade;
 				private JLabel      lb_altura;
+				private JLabel      lb_is_doing;
 				private JTextField  txt_ID;
 				private JTextField  txt_idade;
 				private JTextField  txt_altura;
+				private JTextField  txt_is_doing;
 
 				private RelogioDigital relogio;
 
@@ -115,13 +118,25 @@ public class JanelaUsuario extends JFrame implements ActionListener{
 			this.setLocationRelativeTo(null);                           // Centralizar;
 			this.setResizable(false);                                   // Não pode redimencionar
 			this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-			this.inicializar(p);
+			this.inicializar(p, "");
+			this.setVisible(true);
+		}
+
+		public JanelaUsuario(Pessoa p, String situa){
+			super("Janela Usuario");
+			this.setLayout(null);
+			this.setSize(LARGURA, ALTURA);
+			this.setLocationRelativeTo(null);                           // Centralizar;
+			this.setResizable(false);                                   // Não pode redimencionar
+			this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+			this.inicializar(p, situa);
 			this.setVisible(true);
 		}
 
 	// Metodos Adicionais:	
-		public void inicializar(Pessoa p){
+		public void inicializar(Pessoa p, String situa){
 			this.pessoa = p;
+			this.situation = situa;
 			// Inicializar Painel 01:
 				// Atributos:
 					String mensagem = "Bem Vindo, " + p.getName() + "!\n";
@@ -141,6 +156,17 @@ public class JanelaUsuario extends JFrame implements ActionListener{
 					this.txt_altura = new JTextField(8);
 					this.txt_altura.setText(Float.toString(p.getAltura())+"m");
 					this.txt_altura.setEditable(false);
+
+					this.lb_is_doing  = new JLabel("Atualmente: ");
+					this.txt_is_doing = new JTextField(25);
+					String str_is_doing;
+					if(p.getIs_doing()!=null){
+						str_is_doing = p.getIs_doing().getName();
+					}else{
+						str_is_doing = "Empty!";
+					}
+					this.txt_is_doing.setText(str_is_doing);
+					this.txt_is_doing.setEditable(false);
 
 					this.relogio = new RelogioDigital();
 
@@ -169,6 +195,11 @@ public class JanelaUsuario extends JFrame implements ActionListener{
 					spring_layout_1.putConstraint(SpringLayout.NORTH, txt_altura, 10, SpringLayout.SOUTH,  lb_idade);
 					spring_layout_1.putConstraint(SpringLayout.WEST,  txt_altura, 17, SpringLayout.EAST,  lb_altura);
 
+					spring_layout_1.putConstraint(SpringLayout.NORTH, lb_is_doing,  0, SpringLayout.NORTH,    lb_ID);
+					spring_layout_1.putConstraint(SpringLayout.WEST,  lb_is_doing,  250, SpringLayout.EAST,   lb_ID);
+					spring_layout_1.putConstraint(SpringLayout.NORTH, txt_is_doing, 10, SpringLayout.SOUTH,   lb_is_doing);
+					spring_layout_1.putConstraint(SpringLayout.WEST,  txt_is_doing, -100, SpringLayout.WEST,  lb_is_doing);
+
 					spring_layout_1.putConstraint(SpringLayout.NORTH,    relogio,  10, SpringLayout.NORTH,  painel_1);
 					spring_layout_1.putConstraint(SpringLayout.EAST,     relogio, -45, SpringLayout.EAST,   painel_1);
 
@@ -183,6 +214,8 @@ public class JanelaUsuario extends JFrame implements ActionListener{
 					painel_1.add(txt_idade);		
 					painel_1.add(lb_altura);
 					painel_1.add(txt_altura);
+					painel_1.add(lb_is_doing);
+					painel_1.add(txt_is_doing);
 
 					painel_1.add(relogio);
 
@@ -329,17 +362,21 @@ public class JanelaUsuario extends JFrame implements ActionListener{
 					painel_3.add(lb_lista);
 					painel_3.add(jl_lista_scroll);
 
-
 			// Adicionar:				
 				this.add(painel_1);	
 				this.add(painel_2);	
 				this.add(painel_3);		
+
+			// Retorno Ação Janela Anterior:
+				if(this.situation!="" && this.situation!=null){JOptionPane.showMessageDialog(null, this.situation);}		
 
 		}
 
 		@Override
 		public void actionPerformed(ActionEvent event){
 			if(event.getSource() == sair){
+				salvar.excPessoa(pessoa);
+		        salvar.escPessoa(pessoa);
 				JanelaPrincipal janela_principal = new JanelaPrincipal();
 				this.dispose();
 			}
@@ -411,24 +448,20 @@ public class JanelaUsuario extends JFrame implements ActionListener{
 	    	}
 	    	else if(event.getSource() == buyButton) {
 	    		String selected=(String)comboBox.getSelectedItem();
-	            if(selected!=null){ 
+	            if(selected!=null){
 		            if(grupo_butt.getSelection().getActionCommand().equals("brinquedos")){
 			            for(int i=0; i<=AL_brinquedos.size()-1; i++){
 			                if(AL_brinquedos.get(i).getName().equals(selected)){
-			                    pessoa.compraIngresso(AL_brinquedos.get(i));
-			                    salvar.excPessoa(pessoa);
-			                    salvar.escPessoa(pessoa);
-			                    JanelaUsuario janela_usuario = new JanelaUsuario(pessoa);
+			                    situation = pessoa.compraIngresso(AL_brinquedos.get(i), relogio.getHora());
+			                    JanelaUsuario janela_usuario = new JanelaUsuario(pessoa, situation);
 			                    this.dispose();
 			                }
 			            }
 		        	}else if(grupo_butt.getSelection().getActionCommand().equals("restaurantes")) {
 			            for(int i=0; i<=AL_restaurantes.size()-1; i++){
 			                if(AL_restaurantes.get(i).getName().equals(selected)){
-			                    pessoa.compraIngresso(AL_restaurantes.get(i));
-								salvar.excPessoa(pessoa);
-			                    salvar.escPessoa(pessoa);
-			                    JanelaUsuario janela_usuario = new JanelaUsuario(pessoa);
+			                    situation = pessoa.compraIngresso(AL_restaurantes.get(i), relogio.getHora());
+			                    JanelaUsuario janela_usuario = new JanelaUsuario(pessoa, situation);
 			                    this.dispose();
 			                }
 			           	}
